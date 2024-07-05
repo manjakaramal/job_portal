@@ -160,6 +160,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://job-portal-nu-nine.vercel.app",
 ]
 
+CORS_ALLOW_CREDENTIALS = True
 
 SECURE_HSTS_SECONDS = 31536000  # Example: 1 year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
