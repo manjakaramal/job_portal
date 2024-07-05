@@ -5,7 +5,7 @@ from typing import List, Optional
 class CategorySchema(ModelSchema):
     class Meta:
         model = Category
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'image_url']
 
 class SubCategorySchema(ModelSchema):
     category: Optional[CategorySchema]
