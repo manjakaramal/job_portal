@@ -158,6 +158,7 @@ AUTH_USER_MODEL = 'ninja_api.User'
 
 CORS_ALLOWED_ORIGINS = [
     "https://job-portal-nu-nine.vercel.app",
+    "http://localhost:3000",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
