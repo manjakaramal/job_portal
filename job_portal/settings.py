@@ -157,8 +157,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'ninja_api.User'
 
 CORS_ALLOWED_ORIGINS = [
-    
+    "https://job-portal-nu-nine.vercel.app",
 ]
+
 
 SECURE_HSTS_SECONDS = 31536000  # Example: 1 year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
