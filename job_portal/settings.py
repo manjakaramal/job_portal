@@ -40,9 +40,9 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
-print(f"SECRET_KEY: {SECRET_KEY}")
-print(f"DEBUG: {DEBUG}")
-print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
+# print(f"SECRET_KEY: {SECRET_KEY}")
+# print(f"DEBUG: {DEBUG}")
+# print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
 
 
 # Application definition
