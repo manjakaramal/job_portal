@@ -1,6 +1,6 @@
 from django.contrib import admin
 from unfold.admin import ModelAdmin
-from .models import User, Category,  Country, State, District, CompanyType, Company, ItPark, Job
+from .models import User, Category, SubCategory, Country, State, District, CompanyType, Company, ItPark, Job
 
 # Register your models here.
 
@@ -12,6 +12,9 @@ class CustomUserAdmin(ModelAdmin):
 class CategoryAdmin(ModelAdmin):
     list_display = [field.name for field in Category._meta.fields]
 
+@admin.register(SubCategory)
+class SubCategoryAdmin(ModelAdmin):
+    list_display = [field.name for field in SubCategory._meta.fields]
 
 @admin.register(Country)
 class CountryAdmin(ModelAdmin):
@@ -25,11 +28,9 @@ class StateAdmin(ModelAdmin):
 class DistrictAdmin(ModelAdmin):
     list_display = [field.name for field in District._meta.fields]
 
-
 @admin.register(CompanyType)
 class CompanyTypeAdmin(ModelAdmin):
     list_display = [field.name for field in CompanyType._meta.fields]
-
 
 @admin.register(Company)
 class CompanyAdmin(ModelAdmin):
@@ -41,9 +42,4 @@ class ItParkAdmin(ModelAdmin):
 
 @admin.register(Job)
 class JobAdmin(ModelAdmin):
-    list_display = ['id', 'get_categories', 'company', 'location', 'name', 'posted']
-
-    def get_categories(self, obj):
-        return ', '.join([category.name for category in obj.category.all()])
-
-    get_categories.short_description = 'Categories'
+    list_display = ['id', 'category', 'company', 'location', 'name', 'posted']

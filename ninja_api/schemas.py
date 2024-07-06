@@ -1,5 +1,5 @@
 from ninja import ModelSchema
-from .models import Category, Country, State, District, CompanyType, Company, Job
+from .models import Category, SubCategory, Country, State, District, CompanyType, Company, Job
 from typing import List, Optional
 
 class CategorySchema(ModelSchema):
@@ -7,6 +7,10 @@ class CategorySchema(ModelSchema):
         model = Category
         fields = ['id', 'name', 'image_url']
 
+class SubCategorySchema(ModelSchema):
+    class Meta:
+        model = SubCategory
+        fields = ['id', 'name', 'image_url']
 
 class CountrySchema(ModelSchema):
     class Meta:
@@ -28,7 +32,6 @@ class DistrictSchema(ModelSchema):
         fields = ['id', 'state', 'name']
 
 
-
 class CompanyTypeSchema(ModelSchema):
     class Meta:
         model = CompanyType
@@ -44,13 +47,14 @@ class CompanySchema(ModelSchema):
 
 
 class JobSchema(ModelSchema):
-    category: List[CategorySchema] = []
+    category : Optional[CategorySchema]
+    sub_category: List[SubCategorySchema] = []
     location : Optional[DistrictSchema]
     company : Optional[CompanySchema]
 
     class Meta:
         model = Job
         fields = [
-            'id', 'category', 'itpark', 'name', 'location', 'address', 'min_years_experience', 'max_years_experience',
+            'id', 'category', 'sub_category', 'itpark', 'name', 'location', 'address', 'min_years_experience', 'max_years_experience',
             'description', 'image', 'image_url', 'posted', 'closing_date', 'source'
         ]

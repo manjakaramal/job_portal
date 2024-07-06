@@ -14,6 +14,12 @@ class Category(models.Model):
     image_url = models.CharField(max_length=500, null=True, blank=True)
     def __str__(self):
         return self.name
+    
+class SubCategory(models.Model):
+    name = models.CharField(max_length=500)
+    image_url = models.CharField(max_length=500, null=True, blank=True)
+    def __str__(self):
+        return self.name
 
 class Country(models.Model):
     name = models.CharField(max_length=500)
@@ -62,7 +68,8 @@ class ItPark(models.Model):
     address = models.TextField(null=True, blank=True)
 
 class Job(models.Model):
-    category = models.ManyToManyField(Category, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    sub_category = models.ManyToManyField(SubCategory, blank=True)
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, blank=True)
     itpark = models.ForeignKey(ItPark, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=500)
