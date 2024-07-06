@@ -20,11 +20,6 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
-# Initialize environment variables
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
 
 # Reading .env file
 environ.Env.read_env()
@@ -45,9 +40,9 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
-# print(f"SECRET_KEY: {SECRET_KEY}")
-# print(f"DEBUG: {DEBUG}")
-# print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
+print(f"SECRET_KEY: {SECRET_KEY}")
+print(f"DEBUG: {DEBUG}")
+print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
 
 
 # Application definition
@@ -156,6 +151,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # New Abstracted Model Connection
 AUTH_USER_MODEL = 'ninja_api.User'
 
+NINJA_PAGINATION_PER_PAGE = 10
+
 CORS_ALLOWED_ORIGINS = [
     "https://job-portal-nu-nine.vercel.app",
     "http://localhost:3000",
@@ -166,6 +163,7 @@ CORS_ALLOW_CREDENTIALS = True
 SECURE_HSTS_SECONDS = 31536000  # Example: 1 year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', default=False)
+SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', default=False)
+CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', default=False)
+
