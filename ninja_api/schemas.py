@@ -1,5 +1,5 @@
 from ninja import ModelSchema
-from .models import Category, Expirience, SubCategory, ManyCategory, Country, State, District, Keyword, CompanyType, Company, Expirience, Job
+from .models import Category, Experience, SubCategory, ManyCategory, Country, State, District, Keyword, CompanyType, Company, Experience, Job
 from typing import List, Optional
 
 class CategorySchema(ModelSchema):
@@ -58,9 +58,9 @@ class CompanySchema(ModelSchema):
         model = Company
         fields = ['id', 'name', 'location', 'company_type', 'website', 'instagram', 'facebook', 'google_map']
 
-class ExpirienceSchema(ModelSchema):
+class ExperienceSchema(ModelSchema):
     class Meta:
-        model = Expirience
+        model = Experience
         fields = ['id', 'name']
 
 class JobSchema(ModelSchema):
@@ -70,12 +70,12 @@ class JobSchema(ModelSchema):
     location : Optional[DistrictSchema]
     keyword : Optional[KeywordSchema]
     company : Optional[CompanySchema]
-    expirience: Optional[ExpirienceSchema]
+    experience: Optional[ExperienceSchema]
 
     class Meta:
         model = Job
         fields = [
             'id', 'category', 'sub_category', 'many_category', 'location',
-            'keyword','expirience', 'company','job_type', 'description', 'email_one',
+            'keyword','experience', 'company','job_type', 'description', 'email_one',
             'email_two', 'email_three', 'whatsapp', 'phone_one', 'phone_two', 'phone_three', 'source'
         ]

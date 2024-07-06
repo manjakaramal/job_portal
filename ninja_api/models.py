@@ -75,14 +75,14 @@ class Company(models.Model):
         return self.name
 
 
-class Expirience(models.Model):
+class Experience(models.Model):
     name = models.CharField(max_length=50)
     def __str__(self):
         return self.name
     
 
 class Job(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ManyToManyField(Category, blank=True)
     sub_category = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True)
     many_category = models.ManyToManyField(ManyCategory, blank=True)
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, blank=True)
@@ -90,7 +90,7 @@ class Job(models.Model):
     address = models.TextField(null=True, blank=True)
     keyword = models.ForeignKey(Keyword, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=500)
-    expirience = models.ForeignKey(Expirience, on_delete=models.SET_NULL, null=True, blank=True)
+    experience = models.ForeignKey(Experience, on_delete=models.SET_NULL, null=True, blank=True)
     job_type = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     email_one = models.EmailField(null=True, blank=True)
