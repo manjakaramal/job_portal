@@ -1,6 +1,6 @@
 from ninja import Router
-from .models import Category, SubCategory,Job
-from .schemas import CategorySchema, SubCategorySchema, JobSchema
+from .models import Category, Job
+from .schemas import CategorySchema, JobSchema
 from typing import List
 from ninja.pagination import paginate, PageNumberPagination
 
@@ -11,10 +11,10 @@ def list_categories(request):
     categories = Category.objects.all()
     return categories
 
-@router.get('/categories/{category_id}/subcategories/', response=List[SubCategorySchema])
-def list_subcategories(request, category_id: int):
-    subcategories = SubCategory.objects.filter(category_id=category_id)
-    return subcategories
+# @router.get('/categories/{category_id}/subcategories/', response=List[SubCategorySchema])
+# def list_subcategories(request, category_id: int):
+#     subcategories = SubCategory.objects.filter(category_id=category_id)
+#     return subcategories
 
 
 @router.get('/jobs/', response=List[JobSchema])

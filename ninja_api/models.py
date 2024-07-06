@@ -15,20 +15,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class SubCategory(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    name = models.CharField(max_length=500)
-
-    def __str__(self):
-        return self.name
-
-class ManyCategory(models.Model):
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True)
-    name = models.CharField(max_length=500)
-
-    def __str__(self):
-        return self.name
-
 class Country(models.Model):
     name = models.CharField(max_length=500)
 
@@ -49,11 +35,6 @@ class District(models.Model):
     def __str__(self):
         return self.name
     
-class Keyword(models.Model):
-    name = models.CharField(max_length=500)
-
-    def __str__(self):
-        return self.name
 
 class CompanyType(models.Model):
     name = models.CharField(max_length=500)
@@ -62,9 +43,10 @@ class CompanyType(models.Model):
         return self.name
 
 class Company(models.Model):
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=500, unique=True)
     location = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
     company_type = models.ForeignKey(CompanyType, on_delete=models.SET_NULL, null=True, blank=True)
     website = models.CharField(max_length=500, null=True, blank=True)
     instagram = models.CharField(max_length=500, null=True, blank=True)
@@ -74,35 +56,26 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
-
-class Experience(models.Model):
-    name = models.CharField(max_length=50)
-    def __str__(self):
-        return self.name
-    
+class ItPark(models.Model):
+    name = models.CharField(max_length=500, unique=True)
+    location = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
 
 class Job(models.Model):
     category = models.ManyToManyField(Category, blank=True)
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True)
-    many_category = models.ManyToManyField(ManyCategory, blank=True)
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, blank=True)
+    itpark = models.ForeignKey(ItPark, on_delete=models.SET_NULL, null=True, blank=True)
+    name = models.CharField(max_length=500)
     location = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
-    keyword = models.ForeignKey(Keyword, on_delete=models.SET_NULL, null=True, blank=True)
-    name = models.CharField(max_length=500)
-    experience = models.ForeignKey(Experience, on_delete=models.SET_NULL, null=True, blank=True)
-    job_type = models.CharField(max_length=50, null=True, blank=True)
+    min_years_experience = models.PositiveIntegerField(null=True, blank=True)
+    max_years_experience = models.PositiveIntegerField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    email_one = models.EmailField(null=True, blank=True)
-    email_two = models.EmailField(null=True, blank=True)
-    email_three = models.EmailField(null=True, blank=True)
-    phone_one = models.CharField(max_length=20, null=True, blank=True)
-    phone_two = models.CharField(max_length=20, null=True, blank=True)
-    phone_three = models.CharField(max_length=20, null=True, blank=True)
-    whatsapp = models.CharField(max_length=20, null=True, blank=True)
-    source = models.CharField(max_length=500, null=True, blank=True)
+    image = models.ImageField(upload_to='jobs', null=True, blank=True)
+    image_url = models.CharField(max_length=500, null=True, blank=True)
     posted = models.DateField(auto_now_add=True, null=True)
     closing_date = models.DateField(null=True, blank=True)
+    source = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.name
