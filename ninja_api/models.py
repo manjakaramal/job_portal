@@ -16,6 +16,7 @@ class Category(models.Model):
         return self.name
     
 class SubCategory(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=500)
     image_url = models.CharField(max_length=500, null=True, blank=True)
     def __str__(self):

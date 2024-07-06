@@ -10,7 +10,7 @@ class CategorySchema(ModelSchema):
 class SubCategorySchema(ModelSchema):
     class Meta:
         model = SubCategory
-        fields = ['id', 'name', 'image_url']
+        fields = ['id', 'category', 'name', 'image_url']
 
 class CountrySchema(ModelSchema):
     class Meta:
