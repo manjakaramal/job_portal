@@ -64,7 +64,7 @@ class ExperienceSchema(ModelSchema):
         fields = ['id', 'name']
 
 class JobSchema(ModelSchema):
-    category: Optional[CategorySchema]
+    category: List[CategorySchema] = []
     sub_category : Optional[SubCategorySchema]
     many_category : List[ManyCategorySchema] = []
     location : Optional[DistrictSchema]
