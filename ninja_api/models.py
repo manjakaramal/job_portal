@@ -64,12 +64,13 @@ class Company(models.Model):
         return self.name
 
 class ItPark(models.Model):
-    name = models.CharField(max_length=500, unique=True)
+    name = models.CharField(max_length=500)
     location = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        location_name = self.location.name if self.location else "No Location"
+        return f"{self.name} - {location_name}"
 
 class Job(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
@@ -83,7 +84,7 @@ class Job(models.Model):
     max_years_experience = models.PositiveIntegerField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='jobs', null=True, blank=True)
-    image_url = models.CharField(max_length=500, null=True, blank=True)
+    image_url = models.CharField(max_length=1500, null=True, blank=True)
     posted = models.DateField(auto_now_add=True, null=True)
     closing_date = models.DateField(null=True, blank=True)
     source = models.CharField(max_length=500, null=True, blank=True)
