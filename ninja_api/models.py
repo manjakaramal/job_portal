@@ -67,6 +67,9 @@ class ItPark(models.Model):
     location = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
 class Job(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     sub_category = models.ManyToManyField(SubCategory, blank=True)
