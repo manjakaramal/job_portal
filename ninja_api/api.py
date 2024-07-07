@@ -23,7 +23,7 @@ def list_jobs(request):
     jobs = Job.objects.all()
     return jobs
 
-@router.get('/jobs/{job_id}/')
+@router.get('/jobs/{job_id}/', response=JobSchema)
 def get_job(request, job_id: int):
     job = Job.objects.get(id=job_id)
-    return JobSchema(job).dict()
+    return job
