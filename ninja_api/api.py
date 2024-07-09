@@ -65,6 +65,7 @@ def list_category_job(request, category_id: int, sub_category: int = None):
 
 # /api/jobs/search?query=developer
 @router.get("/jobs/search", response=List[JobSchema])
+@paginate(PageNumberPagination)
 def search_jobs(request, query: Optional[str] = Query(None)):
     jobs = Job.objects.all()
 
