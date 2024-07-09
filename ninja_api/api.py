@@ -73,6 +73,6 @@ def search_jobs(request, query: Optional[str] = Query(None)):
             Q(name__icontains=query) |
             Q(category__name__icontains=query) |
             Q(sub_category__name__icontains=query)
-        )
-    
+        ).distinct()
+
     return jobs
