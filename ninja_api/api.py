@@ -31,6 +31,7 @@ def list_category_subcategories(request, category_id: int):
 
 # /api/categories/${categoryId}/jobs?sub_category=${subcategoryId}        
 @router.get('/categories/{category_id}/jobs/', response=List[JobSchema])
+@paginate(PageNumberPagination)
 def list_category_job(request, category_id: int, sub_category: int = None):
     category = Category.objects.get(id=category_id)
     jobs_query = Job.objects.filter(category=category)
