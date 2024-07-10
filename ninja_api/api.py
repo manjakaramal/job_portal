@@ -63,7 +63,6 @@ def list_category_job(request, category_id: int, sub_category: int = None):
 # /api/jobs/search?subcategory=2 - returns jobs in subcategory with ID 2.
 # /api/jobs/search?name=developer&category=1&subcategory=2 - returns jobs matching all provided filters.
 
-
 # /api/jobs/search?query=developer
 @router.get("/jobs/search", response=List[JobSchema])
 @paginate(PageNumberPagination)
