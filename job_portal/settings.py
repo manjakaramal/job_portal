@@ -151,7 +151,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # New Abstracted Model Connection
 AUTH_USER_MODEL = 'ninja_api.User'
 
-NINJA_PAGINATION_PER_PAGE = 10
+NINJA_PAGINATION_PER_PAGE = 20
 
 CORS_ALLOWED_ORIGINS = [
     "https://job-portal-nu-nine.vercel.app",

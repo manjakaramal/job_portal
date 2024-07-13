@@ -1,17 +1,21 @@
 from ninja import Router, Query
-from .models import Category, SubCategory, Job
-from .schemas import CategorySchema, SubCategorySchema, JobSchema
+from .models import Category, SubCategory, Job, District
+from .schemas import CategorySchema, SubCategorySchema, JobSchema, DistrictSchema
 from typing import List, Optional
 from ninja.pagination import paginate, PageNumberPagination
 from django.db.models import Q
 
 router = Router()
 
+# @router.get('/categories/', response=List[CategorySchema])
+# def list_categories(request):
+#     categories = Category.objects.all()
+#     return categories
+
 @router.get('/categories/', response=List[CategorySchema])
 def list_categories(request):
-    categories = Category.objects.all()
+    categories = Category.objects.filter(job__isnull=False).distinct()
     return categories
-
 
 @router.get('/jobs/', response=List[JobSchema])
 @paginate(PageNumberPagination)
@@ -77,3 +81,13 @@ def search_jobs(request, query: Optional[str] = Query(None)):
         ).distinct()
 
     return jobs
+
+@router.get("/subcategories/", response=List[SubCategorySchema])
+def list_sub_categories(request):
+    sub_categories = SubCategory.objects.filter(job__isnull=False).distinct()
+    return sub_categories
+
+@router.get("/districts/", response=List[DistrictSchema])
+def list_districts(request):
+    districts = District.objects.filter(job__isnull=False).distinct()
+    return districts
