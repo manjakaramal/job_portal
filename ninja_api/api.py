@@ -7,11 +7,6 @@ from django.db.models import Q
 
 router = Router()
 
-# @router.get('/categories/', response=List[CategorySchema])
-# def list_categories(request):
-#     categories = Category.objects.all()
-#     return categories
-
 @router.get('/categories/', response=List[CategorySchema])
 def list_categories(request):
     categories = Category.objects.filter(job__isnull=False).distinct()
@@ -45,27 +40,6 @@ def list_category_job(request, category_id: int, sub_category: int = None):
     
     jobs = jobs_query.all()
     return jobs
-
-# @router.get("/jobs/search", response=List[JobSchema])
-# def search_jobs(request, name: Optional[str] = Query(None), category: Optional[int] = Query(None), subcategory: Optional[int] = Query(None)):
-#     jobs = Job.objects.all()
-
-#     if name:
-#         jobs = jobs.filter(name__icontains=name)
-    
-#     if category:
-#         jobs = jobs.filter(category_id=category)
-    
-#     if subcategory:
-#         jobs = jobs.filter(sub_category__id=subcategory)
-    
-#     return jobs
-
-# /api/jobs/search - returns all jobs.
-# /api/jobs/search?name=developer - returns jobs with "developer" in their name.
-# /api/jobs/search?category=1 - returns jobs in category with ID 1.
-# /api/jobs/search?subcategory=2 - returns jobs in subcategory with ID 2.
-# /api/jobs/search?name=developer&category=1&subcategory=2 - returns jobs matching all provided filters.
 
 # /api/jobs/search?query=developer
 @router.get("/jobs/search", response=List[JobSchema])

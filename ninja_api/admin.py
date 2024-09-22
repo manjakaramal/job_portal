@@ -1,45 +1,62 @@
 from django.contrib import admin
-from unfold.admin import ModelAdmin
-from .models import User, Category, SubCategory, Country, State, District, CompanyType, Company, ItPark, Job
-
-# Register your models here.
+from .models import (
+    User, Category, SubCategory, Country, State, District,
+    CompanyType, Company, ItPark, Job
+)
 
 @admin.register(User)
-class CustomUserAdmin(ModelAdmin):
-    list_display = ['id', 'username', 'is_superuser', 'is_staff', 'is_customer', 'is_active']
+class UserModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'username', 'email', 'is_active')
+    search_fields = ('username', 'email')
+    list_filter = ('is_active',)
 
 @admin.register(Category)
-class CategoryAdmin(ModelAdmin):
-    list_display = [field.name for field in Category._meta.fields]
-
+class CategoryModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'image_url')
+    search_fields = ('name',)
+    
 @admin.register(SubCategory)
-class SubCategoryAdmin(ModelAdmin):
-    list_display = [field.name for field in SubCategory._meta.fields]
+class SubCategoryModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'category', 'image_url')
+    search_fields = ('name',)
+    list_filter = ('category',)
 
 @admin.register(Country)
-class CountryAdmin(ModelAdmin):
-    list_display = [field.name for field in Country._meta.fields]
+class CountryModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
 
 @admin.register(State)
-class StateAdmin(ModelAdmin):
-    list_display = [field.name for field in State._meta.fields]
+class StateModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'country')
+    search_fields = ('name',)
+    list_filter = ('country',)
 
 @admin.register(District)
-class DistrictAdmin(ModelAdmin):
-    list_display = [field.name for field in District._meta.fields]
+class DistrictModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'state')
+    search_fields = ('name',)
+    list_filter = ('state',)
 
 @admin.register(CompanyType)
-class CompanyTypeAdmin(ModelAdmin):
-    list_display = [field.name for field in CompanyType._meta.fields]
+class CompanyTypeModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
 
 @admin.register(Company)
-class CompanyAdmin(ModelAdmin):
-    list_display = [field.name for field in Company._meta.fields]
+class CompanyModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'location', 'company_type', 'email')
+    search_fields = ('name', 'email')
+    list_filter = ('company_type', 'location')
 
 @admin.register(ItPark)
-class ItParkAdmin(ModelAdmin):
-    list_display = [field.name for field in ItPark._meta.fields]
+class ItParkModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'location')
+    search_fields = ('name',)
+    list_filter = ('location',)
 
 @admin.register(Job)
-class JobAdmin(ModelAdmin):
-    list_display = ['id', 'category', 'company', 'location', 'name', 'posted']
+class JobModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'company', 'category', 'location', 'posted', 'closing_date')
+    search_fields = ('name', 'company__name', 'description')
+    list_filter = ('category', 'company', 'location', 'posted', 'closing_date')

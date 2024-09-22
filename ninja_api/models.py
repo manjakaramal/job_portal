@@ -55,10 +55,10 @@ class Company(models.Model):
     address = models.TextField(null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     company_type = models.ForeignKey(CompanyType, on_delete=models.SET_NULL, null=True, blank=True)
-    website = models.CharField(max_length=500, null=True, blank=True)
-    instagram = models.CharField(max_length=500, null=True, blank=True)
-    facebook = models.CharField(max_length=500, null=True, blank=True)
-    google_map = models.CharField(max_length=500, null=True, blank=True)
+    website = models.URLField(max_length=500, null=True, blank=True)
+    instagram = models.URLField(max_length=500, null=True, blank=True)
+    facebook = models.URLField(max_length=500, null=True, blank=True)
+    google_map = models.URLField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -84,10 +84,10 @@ class Job(models.Model):
     max_years_experience = models.PositiveIntegerField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='jobs', null=True, blank=True)
-    image_url = models.CharField(max_length=1500, null=True, blank=True)
+    image_url = models.URLField(max_length=1500, null=True, blank=True)
     posted = models.DateField(auto_now_add=True, null=True)
     closing_date = models.DateField(null=True, blank=True)
-    source = models.CharField(max_length=500, null=True, blank=True)
+    source = models.URLField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.name
